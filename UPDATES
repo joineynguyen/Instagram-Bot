@@ -11,3 +11,4 @@
 8/22/2020 | Ver. 155.0
 
 1) Auto-like feature was also liking the post's comments. The comment's 'like' button also has an "aria-label = 'Like'" attribute. To counter and specify the like button we want, another attribute "height='24'" was added to AND to in the WebElement currentLikeButton under likeAllPOstsInFeed function.
+2) Decided to work on a feature for the bot to only like pictures from the current day to lower suspicion of bot behavior. (Ex. The bost likes all posts on feed including posts from weeks back)
