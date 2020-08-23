@@ -15,3 +15,8 @@
   A) Succesfully added a feature to stop bot from auto liking when bot reaches posts that are at least a day old.
     I) Easiest way to traverse from post to post on Instagram's dynamic website is to search for an unliked button then click it to flag it visisted, and then the while loop proceeds to find the next unvisited post to like. To get the post's date, we traverse up the like button element's tree until we find the parent that also have the time child. We then get the child with time information and break the while loop if the time is at least 1 day old. This code can be found under likePostsFromToday() function.
 3) Decided to add a story viewer feature
+
+8/23/2020 | Ver. 155.0
+
+1) Completed auto story viewer feature
+  A) Please leave your cursor on the URL to not interfere with automation
