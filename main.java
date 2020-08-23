@@ -1,11 +1,12 @@
 package newpackage;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.By; // to find elements by classname, xpath, etc
+import org.openqa.selenium.WebDriver; //to automate browsing 
+import org.openqa.selenium.WebElement; //to store web elements
+import org.openqa.selenium.chrome.ChromeDriver; //to automate browsing specifically for chrome browser
+
+import org.openqa.selenium.support.ui.ExpectedConditions; //to help wait for a execution to be done
+import org.openqa.selenium.support.ui.WebDriverWait; //to help wait for a execution to be done
 
 
 public class InstagramBot 
@@ -14,7 +15,8 @@ public class InstagramBot
 	String password;
 	String baseUrl = "http://www.instagram.com";
 	WebDriver driver = new ChromeDriver();
-	WebDriverWait wait = new WebDriverWait(driver, 10); 
+	//gives 10 second for driver to find an element or else returns null
+	WebDriverWait wait = new WebDriverWait(driver, 3); 
 	
 	
 	public InstagramBot(String username, String password)
@@ -57,11 +59,58 @@ public class InstagramBot
 		
 	}
 	
-
-	void likePostsFromToday()
+	//after finishing any bot automation function, we want to always return to the top of the page so next automation function can perform correctly
+	void goTopOfPage()
 	{
-		//to counter Instagram's like limit of 300 post likes a day
-		final int likeLimit = 300;
+		WebElement instagramLogo = driver.findElement(By.className("s4Iyt"));
+		instagramLogo.click();
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+		
+	void likeAllPostsOnFeed()
+	{
+		//to counter Instagram's like limit of 700 post likes a day
+		final int likeLimit = 700;
+		int likeCounter = 0;
+		
+		//find post that is unliked
+		WebElement currentLikeButton = driver.findElement(By.xpath("//*[@aria-label='Like' and @height='24']"));
+		
+		//while there are more posts that is unliked and we are under our like limit for the day
+		while(currentLikeButton != null && likeCounter < likeLimit)
+		{
+			currentLikeButton.click();
+			
+			//delay every like by 1 second to counter bot activity suspicion
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+			
+			//try to find next available post to like
+			currentLikeButton = driver.findElement(By.xpath("//*[@aria-label='Like' and @height='24']"));
+			
+			likeCounter += 1;
+		}
+		
+		//to get ready for other automation functions to work as they work best at the top of the page
+		goTopOfPage();
+	}
+	
+	
+	void likePostsOnFeedFromToday()
+	{
+		//to counter Instagram's like limit of 700 post likes a day
+		final int likeLimit = 700;
 		int likeCounter = 0;
 		
 		//find post that is unliked
@@ -88,8 +137,6 @@ public class InstagramBot
 				break;
 			}
 			
-			System.out.println(timePosted);
-			System.out.println("---------------------------");
 			currentLikeButton.click();
 			
 			//delay every like by 1 second to counter bot activity suspicion
@@ -105,16 +152,63 @@ public class InstagramBot
 			
 			likeCounter += 1;
 		}
-
+		
+		//to get ready for other automation functions to work as they work best at the top of the page
+		goTopOfPage();
 	}
 
+	void watchStories()
+	{
+		
+		//web element for first story
+		WebElement storyElement = wait.until(ExpectedConditions.elementToBeClickable(By.className("OE3OK")));
+		storyElement.click();
+		
+		//waits 100 milliseconds to let story load
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
 	
+		
+		while(true)
+		{
+			//web element for next story button	
+			try
+			{
+				WebElement nextStory = wait.until(ExpectedConditions.elementToBeClickable(By.className("coreSpriteRightChevron")));
+				nextStory.click();
+			}
+			catch(Exception e)
+			{
+				break;
+			}
+			
+		
+			//waits 100 milliseconds to let next button load
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+		
+		}
+		
+		//to get ready for other automation functions to work as they work best at the top of the page
+		goTopOfPage();
+	}
 	
 	public static void main(String[] args)
 	{
 		
 		InstagramBot myBot = new InstagramBot("username", "password");
-		myBot.likePostsFromToday();
+		myBot.watchStories();
+		myBot.likePostsOnFeedFromToday();
+		
+		
 		
 	}
 }
