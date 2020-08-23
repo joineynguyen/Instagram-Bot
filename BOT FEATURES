@@ -6,5 +6,7 @@ Other features:
 Auto-unfollowing all accounts that are not following our account back. (Mutual following only)
 
 Completed features:
-Auto-liking all posts on the Instagram feed.
+Auto-liking all posts on the Instagram feed
+  - Stop auto liking when posts are older than 1 day or when like limit of 300 is reached.
+
 
