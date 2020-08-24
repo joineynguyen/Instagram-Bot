@@ -1,0 +1,3 @@
+1) For the function, likePostsOnFeedFromToday(), the function will stop if the first post on feed is at least 1 day old. This means that any post after, even if less than a day old will not be liked. This usually happens when the account follows a new account which will then add their posts to your feed, skewing up the chronological order.
+
+2) For the watchStories() function: after watching all stories, the bot will continue clicking the next button after leaving the stories window. The bot will continue to click next button on posts with multiple pics/vids. The bot will soon stop and return to the top of the page. No damage will be done, don't be shocked.
