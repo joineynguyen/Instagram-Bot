@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver; //to automate browsing specifica
 import org.openqa.selenium.support.ui.ExpectedConditions; //to help wait for a execution to be done
 import org.openqa.selenium.support.ui.WebDriverWait; //to help wait for a execution to be done
 
+import java.util.Random; //used to randomize number for random comment phrase in string array
+
 
 public class InstagramBot 
 {
@@ -106,7 +108,6 @@ public class InstagramBot
 		goTopOfPage();
 	}
 	
-	
 	void likePostsOnFeedFromToday()
 	{
 		//to counter Instagram's like limit of 700 post likes a day
@@ -201,14 +202,87 @@ public class InstagramBot
 		goTopOfPage();
 	}
 	
+	void likePostsByHashtag(String hashtag, int numOfPostsToLike)
+	{
+		//string array of pre-defined phrases for commenting
+		String[] phrases = {"Wow!", "Amazing :)", "Great pic!", "Sheeesh! :o", "Looks wonderful! :D", "Stunning!", "Very nice!", "Fantastic!", "Love this!"};
+		//used to randomize the comment phrases
+		Random rand = new Random();
+		
+		String baseExplorePageUrl = "https://www.instagram.com/explore/tags/";
+		driver.get(baseExplorePageUrl + hashtag);
+		WebElement firstPic = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"react-root\"]/section/main/article/div[1]/div/div/div[1]/div[1]/a/div")));
+		firstPic.click();
+		
+		//lets picture load
+		try 
+		{
+			Thread.sleep(1000);
+		} catch (InterruptedException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		int likeCounter = 0;
+		
+		while(likeCounter < numOfPostsToLike)
+		{
+			//see if current post is unliked
+			boolean postUnliked = driver.findElements(By.xpath("//*[@aria-label='Like' and @height='24']")).size() > 0;  
+			
+			//if unliked, then like and comment on the post
+			if(postUnliked)
+			{
+				WebElement likeButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@aria-label='Like' and @height='24']")));
+				likeButton.click();
+				WebElement commentTextbox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@aria-label='Add a comment…']")));
+				commentTextbox.click();
+				commentTextbox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@aria-label='Add a comment…']")));
+				commentTextbox.click();
+				
+				String phrase = phrases[rand.nextInt(9)];
+				commentTextbox.sendKeys(phrase);
+				WebElement postButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@type='submit']")));
+				postButton.click();
+				
+				//waits 2 seconds to let the comment get posted
+				try
+				{
+					Thread.sleep(2000);
+				}
+				catch(Exception e)
+				{
+					
+				}
+				
+				likeCounter += 1;
+			}
+			
+			//clicks next arrow 
+			WebElement nextButton = driver.findElement(By.xpath("//*[@class=' _65Bje  coreSpriteRightPaginationArrow']"));
+			nextButton.click();
+			
+			//lets next post load
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(Exception e)
+			{
+				
+			}
+		}
+		
+	}
+	
 	public static void main(String[] args)
 	{
-		
+	
 		InstagramBot myBot = new InstagramBot("username", "password");
-		myBot.watchStories();
-		myBot.likePostsOnFeedFromToday();
-		
-		
+		//myBot.watchStories();
+		//myBot.likePostsOnFeedFromToday();
+		myBot.likePostsByHashtag("hashtag", 10);
 		
 	}
 }
+
