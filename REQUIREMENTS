@@ -1,4 +1,9 @@
-Selenium WebDriver (Make sure to download right one for your programming language)
+Java IDE (I used Eclipse)
+https://www.eclipse.org/downloads/
+
+Selenium WebDriver (Make sure to download the one for java)
 https://www.selenium.dev/downloads/
-Chromedriver (Make sure to check which version of chrome you have to download the right driver
+
+Chromedriver (Make sure to check which version of chrome you have to download the right driver)
 https://chromedriver.chromium.org/downloads
+
