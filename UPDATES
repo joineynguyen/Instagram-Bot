@@ -20,3 +20,8 @@
 
 1) Completed auto story viewer feature
   A) Please leave your cursor on the URL to not interfere with automation
+  
+8/24/2020 | Ver. 155.0
+
+1) Completed feature that likes and comments on posts with hashtag input
+  A) Any posts with comments disabled or limit commenting will disrupt the bot
