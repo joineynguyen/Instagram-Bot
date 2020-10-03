@@ -23,6 +23,6 @@ After completing this small script project, I gained experience in a new library
 ###### **Problems I've Faced:**  
 Since Instagram has a big user base, there are naturally more users to abuse instagram. Instagram was smart to know that instagram bot creators want to complete one action, to create a bot that auto likes pictures. This is the prime action any instagram bot should do. To counter this, instagram developers changed the CSS ID name of the heart randomly after each page refresh and for each post, so implementing an auto liking feature would be harder. I found a way to counter this by having the bot search the like button by its characteristics and/or navigating to it by its neighboring web elements such as the timedate of the post.  
 
-(Click)  
+(Click)
 ###### **[Demo 1](https://youtu.be/QxQyZRhagPw)**  
 ###### **[Demo 2](https://youtu.be/ylplxg9aTJM)**
