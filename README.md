@@ -16,8 +16,10 @@ The bot locates the heart icon by its icon size and description of being unliked
 How the bot likes and comment on N amount of pictures from X hashtag:
 There is a method that takes in parameters of the numbers of posts you want to comment/like and the string for the hashtag you would want to preform this action on. The method takes the hashtag string and adds into a base url of Instagram's explore page. (e.g.: https://www.instagram.com/explore/tags/(taghere)/?hl=en) After reaching the explore page of chosen hashtag, it clicks on the first posts, looks for specific sized heart icon that is unliked and clicks it. It then locates the add comment textbox, clicks on it, and chooses randomly from an array string of responses to input into the reply textbox. Finally, it locates the reply button and clicks it. The bot then looks for the next post arrow and repeats this process N amount of times specified.
 
-
 Demo: 
 https://youtu.be/QxQyZRhagPw (Part I)
 https://youtu.be/ylplxg9aTJM (Part II)
 
+What I've Learned: After completing this small script project, I gained experience in a new library called Selenium Web Driver. I learned that this library can replicate human web browsing almost completely. I understand why CAPTCHA's are mandatory for certain websites to prevent from being abused with this tool. I learned more about the structure and concept about CSS while inspecting websites and its structure in order to use the library methods, which need parameters of CSS ID's.(locating strategies by name, class, ID, tag, single attribute, multiple attribute) I also learned about explicit and implicit waits. They are basically like java sleep method but are used to let the web pages load before running an action.
+
+Problems I've Faced: Since Instagram has a big user base, there are naturally more users to abuse instagram. Instagram was smart to know that instagram bot creators want to complete one action, to create a bot that auto likes pictures. This is the prime action any instagram bot should do. To counter this, instagram developers changed the CSS ID name of the heart randomly after each page refresh and for each post, so implementing an auto liking feature would be harder. I found a way to counter this by having the bot search the like button by its characteristics and neihboring elements.
