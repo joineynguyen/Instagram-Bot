@@ -1,5 +1,5 @@
 # InstagramBot  
-###### **Welcome to my Instagram Bot project.**  
+##### **Welcome to my Instagram Bot project.**  
 Essentially it was for only personal use, so there is no GUI but rather a script to be ran. 
 
 ###### **Motivation:**  
