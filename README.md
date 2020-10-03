@@ -1,7 +1,7 @@
 # InstagramBot
 Welcome to my Instagram Bot project. Essentially it was for only personal use, so there is no GUI but rather a script to be ran. 
 
-Motivation: 
+**Motivation:**
 I have gotten busier with no little time and energy to be active on social media platforms, so I am making this bot to make me appear active on Instagram.
 
 Tools used: 
